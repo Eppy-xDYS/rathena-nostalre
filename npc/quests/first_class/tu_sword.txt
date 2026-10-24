@@ -1080,10 +1080,8 @@ geffen,154,143,3	script	Dequ'ee	734,{
 		set tu_swordman, 21;
 		changequest 8226,8227;
 		close2;
-		if (checkre(0))
-			warp "izlude",127,100;
-		else
-			warp "izlude",35,78;
+		// Ragnarok Solo: the client data only has the renewal Izlude
+		warp "izlude",127,100;
 		end;
 	}
 	if(tu_swordman == 19){
@@ -2199,10 +2197,8 @@ geffen,154,143,3	script	Dequ'ee	734,{
 					mes "of yourself,";
 					mes "brave Swordman.";
 					next;
-					if (checkre(0))
-						warp "izlude",127,100;
-					else
-						warp "izlude",35,78;
+					// Ragnarok Solo: the client data only has the renewal Izlude
+					warp "izlude",127,100;
 					close;
 				}
 			case 2:

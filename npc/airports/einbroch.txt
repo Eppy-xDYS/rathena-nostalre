@@ -90,6 +90,8 @@ airport,143,49,3	script	Arrival Staff#airport2a::airport2	90,{
 airport,126,51,3	duplicate(airport2)	Arrival Staff#airport2b	90
 airport,158,50,3	duplicate(airport2)	Arrival Staff#airport2c	90
 
+// Ragnarok Solo: off, it stood on the airship dock the 2023 client data no longer has
+/*
 einbroch,94,267,3	script	Airship Staff#ein01	91,{
 	mes "[Airship Staff]";
 	mes "Welcome to the";
@@ -108,3 +110,4 @@ einbroch,94,267,3	script	Airship Staff#ein01	91,{
 	mes "you, and enjoy your travels.";
 	close;
 }
+*/

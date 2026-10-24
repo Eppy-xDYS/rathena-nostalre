@@ -262,6 +262,14 @@ static bool logclif_parse_updclhash( int32 fd, struct login_session_data& sd ){
 	return true;
 }
 
+/// Login ID from the client without trailing spaces: MySQL's PAD SPACE collation ignored them when
+/// matching the account, SQLite compares them (phone keyboards add one after autocomplete).
+static void logclif_copy_userid( login_session_data& sd, const char* username ){
+	safestrncpy( sd.userid, username, sizeof( sd.userid ) );
+	for( size_t len = strlen( sd.userid ); len > 0 && sd.userid[len - 1] == ' '; --len )
+		sd.userid[len - 1] = '\0';
+}
+
 template <typename P>
 static bool logclif_parse_reqauth_raw( int32 fd, login_session_data& sd ){
 	P* p = (P*)RFIFOP( fd, 0 );
@@ -270,7 +278,7 @@ static bool logclif_parse_reqauth_raw( int32 fd, login_session_data& sd ){
 	uint32 ipl = session[fd]->client_addr;
 	ip2str( ipl, ip );
 
-	safestrncpy( sd.userid, p->username, sizeof( sd.userid ) );
+	logclif_copy_userid( sd, p->username );
 	sd.clienttype = p->clienttype;
 
 	ShowStatus( "Request for connection of %s (ip: %s)\n", sd.userid, ip );
@@ -301,7 +309,7 @@ static bool logclif_parse_reqauth_md5( int32 fd, login_session_data& sd ){
 	uint32 ipl = session[fd]->client_addr;
 	ip2str( ipl, ip );
 
-	safestrncpy( sd.userid, p->username, sizeof( sd.userid ) );
+	logclif_copy_userid( sd, p->username );
 	sd.clienttype = p->clienttype;
 
 	ShowStatus( "Request for connection (passwdenc mode) of %s (ip: %s)\n", sd.userid, ip );
@@ -335,7 +343,7 @@ static bool logclif_parse_reqauth_sso( int32 fd, login_session_data& sd ){
 
 	size_t token_length = p->packetLength - sizeof( *p );
 
-	safestrncpy( sd.userid, p->username, sizeof( sd.userid ) );
+	logclif_copy_userid( sd, p->username );
 	sd.clienttype = p->clienttype;
 
 	ShowStatus( "Request for connection (SSO mode) of %s (ip: %s)\n", sd.userid, ip );

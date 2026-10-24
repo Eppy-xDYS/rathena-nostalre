@@ -16,14 +16,16 @@
 
 // Izlude
 //============================================================
-izlude,54,139,1	script	Sign#Iz1	111,{
-	mes "^993300- The Sign Reads -^000000";
-	mes "Welcome to the Swordsman Academy.";
-	close;
-}
+// Ragnarok Solo: off, it describes the old Izlude layout
+//izlude,54,139,1	script	Sign#Iz1	111,{
+//	mes "^993300- The Sign Reads -^000000";
+//	mes "Welcome to the Swordsman Academy.";
+//	close;
+//}
 
-izlude,144,148,1	script	Sign#Iz2	111,{
-	mes "^993300- The Sign Reads -^000000";
-	mes "Welcome.";
-	close;
-}
+// Ragnarok Solo: off, it describes the old Izlude layout
+//izlude,144,148,1	script	Sign#Iz2	111,{
+//	mes "^993300- The Sign Reads -^000000";
+//	mes "Welcome.";
+//	close;
+//}

@@ -2781,7 +2781,7 @@ void mob_damage(mob_data *md, block_list *src, int32 damage)
 	if (battle_config.show_mob_info&3)
 		clif_name_area(md);
 
-#if PACKETVER >= 20120404
+#if PACKETVER >= 20120404 || defined(SOLO_MONSTER_HP_BAR)
 	if (battle_config.monster_hp_bars_info && !map_getmapflag(md->m, MF_HIDEMOBHPBAR)) {
 		if (md->special_state.ai == AI_ABR || md->special_state.ai == AI_BIONIC) {
 			clif_summon_hp_bar(*md);
@@ -3874,7 +3874,7 @@ void mob_heal(mob_data *md,uint32 heal)
 {
 	if (battle_config.show_mob_info&3)
 		clif_name_area(md);
-#if PACKETVER >= 20120404
+#if PACKETVER >= 20120404 || defined(SOLO_MONSTER_HP_BAR)
 	if (battle_config.monster_hp_bars_info && !map_getmapflag(md->m, MF_HIDEMOBHPBAR)) {
 		if (md->special_state.ai == AI_ABR || md->special_state.ai == AI_BIONIC) {
 			clif_summon_hp_bar(*md);

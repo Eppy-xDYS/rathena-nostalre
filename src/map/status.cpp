@@ -9426,7 +9426,7 @@ void status_set_viewdata(block_list *bl, int32 class_)
 				sd->vd.look[LOOK_HEAD_TOP] = sd->status.head_top;
 				sd->vd.look[LOOK_HEAD_MID] = sd->status.head_mid;
 				sd->vd.look[LOOK_HEAD_BOTTOM] = sd->status.head_bottom;
-				sd->vd.look[LOOK_HAIR] = cap_value(sd->status.hair, MIN_HAIR_STYLE, MAX_HAIR_STYLE);
+				sd->vd.look[LOOK_HAIR] = cap_value(sd->status.hair, MIN_HAIR_STYLE, pc_max_hair_style(*sd)); // Ragnarok Solo: per sex and race
 				sd->vd.look[LOOK_HAIR_COLOR] = cap_value(sd->status.hair_color, MIN_HAIR_COLOR, MAX_HAIR_COLOR);
 				sd->vd.look[LOOK_CLOTHES_COLOR] = cap_value(sd->status.clothes_color, MIN_CLOTH_COLOR, MAX_CLOTH_COLOR);
 				sd->vd.look[LOOK_BODY2] = sd->status.body;

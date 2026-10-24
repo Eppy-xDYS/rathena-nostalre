@@ -41,9 +41,16 @@ else()
 	message( FATAL_ERROR "unexpected architecture (CMAKE_SIZEOF_VOID_P is ${CMAKE_SIZEOF_VOID_P})" )
 endif()
 
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib/${suffixInstallStr})
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib/${suffixInstallStr})
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+# Overridable so a cross-compile build does not overwrite the native one
+if( NOT CMAKE_ARCHIVE_OUTPUT_DIRECTORY )
+	set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib/${suffixInstallStr})
+endif()
+if( NOT CMAKE_LIBRARY_OUTPUT_DIRECTORY )
+	set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib/${suffixInstallStr})
+endif()
+if( NOT CMAKE_RUNTIME_OUTPUT_DIRECTORY )
+	set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+endif()
 set(CMAKE_C_CREATE_SHARED_LIBRARY)
 set(CMAKE_CXX_CREATE_SHARED_LIBRARY)
 set(CMAKE_DEBUG_POSTFIX "d")
@@ -329,6 +336,16 @@ option( ENABLE_EXTRA_SOCKET_POLL "enable SOCKET_EPOLL (default=OFF)" OFF )
 if( ENABLE_EXTRA_SOCKET_POLL )
 	set_property( CACHE GLOBAL_DEFINITIONS  PROPERTY VALUE "${GLOBAL_DEFINITIONS} -DSOCKET_EPOLL" )
 	message( STATUS "Enabled SOCKET_EPOLL" )
+endif()
+
+
+#
+# Use an embedded SQLite database file instead of a MySQL server
+#
+option( ENABLE_SQLITE "use embedded SQLite instead of MySQL (default=OFF)" OFF )
+if( ENABLE_SQLITE )
+	set_property( CACHE GLOBAL_DEFINITIONS  PROPERTY VALUE "${GLOBAL_DEFINITIONS} -DRA_SQLITE" )
+	message( STATUS "Enabled SQLite backend" )
 endif()
 
 

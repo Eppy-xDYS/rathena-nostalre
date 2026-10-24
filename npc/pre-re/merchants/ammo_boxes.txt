@@ -125,4 +125,5 @@ S_Casing:
 	close;
 }
 
-izlude,171,127,3	duplicate(mdk)	Magazine Dealer Kenny#iz	4_M_01
+// Ragnarok Solo: placed for the renewal Izlude (the client data has no other)
+izlude,120,160,3	duplicate(mdk)	Magazine Dealer Kenny#iz	4_M_01

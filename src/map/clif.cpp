@@ -5114,7 +5114,7 @@ void clif_getareachar_unit( map_session_data* sd,block_list *bl ){
 				clif_specialeffect_single(bl,EF_GIANTBODY2,sd->fd);
 			else if(md->special_state.size==SZ_MEDIUM)
 				clif_specialeffect_single(bl,EF_BABYBODY2,sd->fd);
-#if PACKETVER >= 20120404
+#if PACKETVER >= 20120404 || defined(SOLO_MONSTER_HP_BAR)
 			if (battle_config.monster_hp_bars_info && !map_getmapflag(bl->m, MF_HIDEMOBHPBAR)) {
 				// Must show hp bar to all char who already hit the mob.
 				for( const auto& entry : md->dmglog ){
@@ -19956,7 +19956,7 @@ void clif_snap( const block_list* bl, int16 x, int16 y ) {
 
 /// 0977 <id>.L <HP>.L <maxHP>.L (ZC_HP_INFO).
 void clif_monster_hp_bar( const mob_data* md, int32 fd ) {
-#if PACKETVER >= 20120404
+#if PACKETVER >= 20120404 || defined(SOLO_MONSTER_HP_BAR)
 	WFIFOHEAD(fd,packet_len(0x977));
 
 	WFIFOW(fd,0)  = 0x977;

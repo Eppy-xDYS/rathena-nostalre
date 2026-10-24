@@ -1383,7 +1383,8 @@ int32 skill_additional_effect( block_list* src, block_list *bl, uint16 skill_id,
 						(skill*15 + 55) + pc_checkskill(sd,TF_STEAL)*10 > rnd()%1000) {
 						if(pc_steal_item(sd,bl,pc_checkskill(sd,TF_STEAL)))
 							clif_skill_nodamage(src,*bl,TF_STEAL,skill);
-						else
+						// Ragnarok Solo: no Gank failure from a monster that cannot be stolen from (an MVP or other boss, one already stolen from)
+						else if(dstmd->state.steal_flag != UCHAR_MAX)
 							clif_skill_fail( *sd, RG_SNATCHER );
 					}
 				}

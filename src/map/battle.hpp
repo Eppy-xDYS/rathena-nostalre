@@ -412,6 +412,8 @@ struct Battle_Config
 
 	int32 min_hair_style; // added by [MouseJstr]
 	int32 max_hair_style; // added by [MouseJstr]
+	int32 max_hair_style_male; // Ragnarok Solo: a male human's last style (max_hair_style is a female's)
+	int32 max_hair_style_doram; // Ragnarok Solo: a Doram's last style
 	int32 min_hair_color; // added by [MouseJstr]
 	int32 max_hair_color; // added by [MouseJstr]
 	int32 min_cloth_color; // added by [MouseJstr]

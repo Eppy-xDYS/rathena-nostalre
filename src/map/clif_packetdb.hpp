@@ -1470,6 +1470,11 @@
 #endif
 
 // 2012-04-10aRagexeRE
+// Ragnarok Solo: older client versions get the monster HP bar too (custom/defines_post.hpp)
+#if PACKETVER < 20120410 && defined(SOLO_MONSTER_HP_BAR)
+	packet(0x0977,14); //Monster HP Bar
+#endif
+
 #if PACKETVER >= 20120410
 	parseable_packet(0x089c,26,clif_parse_FriendsListAdd,2);
 	parseable_packet(0x0885,5,clif_parse_HomMenu,2,4);

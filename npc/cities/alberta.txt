@@ -218,10 +218,8 @@ alberta,189,151,5	script	Fisk	4W_SAILOR,{
 			close;
 		}
 		Zeny = Zeny - 500;
-		if (checkre(0))
-			warp "izlude",195,212;
-		else
-			warp "izlude",176,182;
+		// Ragnarok Solo: the client data only has the renewal Izlude
+		warp "izlude",195,212;
 		end;
 	case 3:
 		mes "[Fisk]";

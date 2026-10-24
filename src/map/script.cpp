@@ -6891,8 +6891,8 @@ BUILDIN_FUNC(changelook){
 				return SCRIPT_CMD_FAILURE;
 			}
 
-			if( val > MAX_HAIR_STYLE ){
-				ShowError( "buildin_changelook: Invalid hair style. Maximum: %d\n", MAX_HAIR_STYLE );
+			if( val > pc_max_hair_style( *sd ) ){ // Ragnarok Solo: per sex and race
+				ShowError( "buildin_changelook: Invalid hair style. Maximum: %d\n", pc_max_hair_style( *sd ) );
 				return SCRIPT_CMD_FAILURE;
 			}
 			break;

@@ -215,7 +215,8 @@ que_ng,152,167,3	script	Master Miller	901,{
 	}
 }
 
-payon,184,65,3	script	Wise Bull Horn	866,{
+// Ragnarok Solo: kRO's position (navi_npc_krpri.lub, 2023 and 2026 data); was 184,65
+payon,191,66,3	script	Wise Bull Horn	866,{
 	if (GUNS_Q == 1) {
 		mes "[Wise Bull Horn]";
 		mes "Hello, young wolf.";

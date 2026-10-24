@@ -132,6 +132,12 @@ int32 elemental_create(map_session_data *sd, int32 class_, uint32 lifetime) {
 
 	ele.life_time = lifetime;
 
+	// Ragnarok Solo: a low-SP caster's formula goes negative (max SP / 18 - 100 at summon level 1); the column is
+	// unsigned and the status (`rhw.atk`) is uint16, so -13 failed the elemental's insert on SQLite and would wrap
+	// to 65523 in its status. Never below 0.
+	ele.atk = std::max(ele.atk, 0);
+	ele.atk2 = std::max(ele.atk2, 0);
+
 	// Request Char Server to create this elemental
 	intif_elemental_create(&ele);
 

@@ -53,7 +53,14 @@ add_executable(yamlupgrade)
 target_link_libraries(yamlupgrade PRIVATE tools)
 target_sources(yamlupgrade PRIVATE "yamlupgrade.cpp")
 
-set( TARGET_LIST ${TARGET_LIST} mapcache csv2yaml yaml2sql yamlupgrade  CACHE INTERNAL "" )
+# sql-compat-test: compares SQL backends, built against whichever one common uses
+message( STATUS "Creating target sql-compat-test" )
+add_executable(sql-compat-test "sql_compat_test.cpp")
+target_include_directories(sql-compat-test PRIVATE ${GLOBAL_INCLUDE_DIRS} ${COMMON_BASE_INCLUDE_DIRS} ${RA_INCLUDE_DIRS} ${MYSQL_INCLUDE_DIRS})
+target_link_libraries(sql-compat-test PRIVATE ${GLOBAL_LIBRARIES} ${MYSQL_LIBRARIES} common)
+set_target_properties(sql-compat-test PROPERTIES COMPILE_FLAGS "${GLOBAL_DEFINITIONS} ${COMMON_BASE_DEFINITIONS}")
+
+set( TARGET_LIST ${TARGET_LIST} mapcache csv2yaml yaml2sql yamlupgrade sql-compat-test  CACHE INTERNAL "" )
 
 if( INSTALL_COMPONENT_RUNTIME )
 	cpack_add_component( Runtime_mapcache DESCRIPTION "mapcache generator" DISPLAY_NAME "mapcache" GROUP Runtime )

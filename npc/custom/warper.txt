@@ -167,7 +167,7 @@ T13: Go("geffen",119,59);
 T14: Go("hugel",96,145);
 T15: Restrict("RE");
 	 Go("icecastle",185,212);
-T16: Go("izlude",128,(checkre(3)?146:114));
+T16: Go("izlude",128,146); // Ragnarok Solo: the client data only has the renewal Izlude
 T17: Go("jawaii",251,132);
 T18: Go("yuno",157,51);
 T19: Go("gonryun",160,120);
@@ -644,7 +644,7 @@ OnNaviGenerate:
 	naviregisterwarp("Warper > Einbroch", "einbroch",64,200);
 	naviregisterwarp("Warper > Geffen", "geffen",119,59);
 	naviregisterwarp("Warper > Hugel", "hugel",96,145);
-	naviregisterwarp("Warper > Izlude", "izlude",128,(checkre(3)?146:114));
+	naviregisterwarp("Warper > Izlude", "izlude",128,146); // Ragnarok Solo: the client data only has the renewal Izlude
 	naviregisterwarp("Warper > Jawaii", "jawaii",251,132);
 	naviregisterwarp("Warper > Juno", "yuno",157,51);
 	naviregisterwarp("Warper > Kunlun", "gonryun",160,120);

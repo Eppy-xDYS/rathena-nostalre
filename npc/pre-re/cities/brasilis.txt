@@ -17,4 +17,5 @@
 
 // Brasilis Transportation :: brasilis_trans
 //============================================================
-alberta,247,115,3	duplicate(Crewman_bra2)	Crewman#bra2	100
+// Ragnarok Solo: placed for the renewal layout (the client data has no other)
+alberta,246,82,3	duplicate(Crewman_bra2)	Crewman#bra2	100

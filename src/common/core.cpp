@@ -343,11 +343,14 @@ int32 Core::start( int32 argc, char **argv ){
 		if((p1 = strrchr(argv[0], '/')) != nullptr ||  (p1 = strrchr(argv[0], '\\')) != nullptr ){
 			char *pwd = nullptr; //path working directory
 			SERVER_NAME = ++p1;
-			size_t n = p1-argv[0]; //calc dir name len
-			pwd = safestrncpy((char*)malloc(n + 1), argv[0], n);
-			if(chdir(pwd) != 0)
-				ShowError("Couldn't change working directory to %s for %s, runtime will probably fail",pwd,SERVER_NAME);
-			free(pwd);
+			// RA_KEEP_CWD: binary lives apart from conf/ (Android app: read-only native library dir)
+			if( getenv( "RA_KEEP_CWD" ) == nullptr ){
+				size_t n = p1-argv[0]; //calc dir name len
+				pwd = safestrncpy((char*)malloc(n + 1), argv[0], n);
+				if(chdir(pwd) != 0)
+					ShowError("Couldn't change working directory to %s for %s, runtime will probably fail",pwd,SERVER_NAME);
+				free(pwd);
+			}
 		}else{
 			// On Windows the .bat files have the executable names as parameters without any path separator [Lemongrass]
 			SERVER_NAME = argv[0];

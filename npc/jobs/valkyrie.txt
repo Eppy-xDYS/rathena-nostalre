@@ -173,8 +173,7 @@ valkyrie,48,86,4	script	Valkyrie#	811,{
 			switch (ADVJOB) {
 			case 4008:
 			case 4015:
-				if (checkre(0)) warp "izlude",129,97;
-				else warp "izlude",94,103;
+				warp "izlude",129,97; // Ragnarok Solo: the client data only has the renewal Izlude
 				break;
 			case 4009:
 			case 4016:
@@ -380,8 +379,7 @@ valkyrie,44,33,5	script	Teleporter	124,{
 		case 4: callsub S_Warpchar,"geffen",120,39;
 		case 5: callsub S_Warpchar,"alberta",117,56;
 		case 6:
-			if (checkre(0)) callsub S_Warpchar,"izlude",129,97;
-			else callsub S_Warpchar,"izlude",94,103;
+			callsub S_Warpchar,"izlude",129,97; // Ragnarok Solo: the client data only has the renewal Izlude
 		case 7: callsub S_Warpchar,"aldebaran",91,105;
 		case 8: callsub S_Warpchar,"comodo",209,143;
 		case 9: callsub S_Warpchar,"yuno",328,101;

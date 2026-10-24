@@ -8543,6 +8543,9 @@ static const struct _battle_data {
 	{ "ban_hack_trade",                     &battle_config.ban_hack_trade,                  0,      0,      INT_MAX,        },
 	{ "min_hair_style",                     &battle_config.min_hair_style,                  0,      0,      INT_MAX,        },
 	{ "max_hair_style",                     &battle_config.max_hair_style,                  23,     0,      INT_MAX,        },
+	// Ragnarok Solo: per sex and race, as the client's art has them
+	{ "max_hair_style_male",                &battle_config.max_hair_style_male,             23,     0,      INT_MAX,        },
+	{ "max_hair_style_doram",               &battle_config.max_hair_style_doram,            10,     0,      INT_MAX,        },
 	{ "min_hair_color",                     &battle_config.min_hair_color,                  0,      0,      INT_MAX,        },
 	{ "max_hair_color",                     &battle_config.max_hair_color,                  9,      0,      INT_MAX,        },
 	{ "min_cloth_color",                    &battle_config.min_cloth_color,                 0,      0,      INT_MAX,        },

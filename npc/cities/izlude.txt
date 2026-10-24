@@ -508,10 +508,8 @@ izlu2dun,108,27,0	script	Sailor#2izlude	100,{
 	mes "head back?";
 	next;
 	if (select("Yeah, I'm tired to death.:Nope, I love this place!") == 1) {
-		if(checkre(0))
-			warp "izlude",197,210;
-		else
-			warp "izlude",176,182;
+		// Ragnarok Solo: the client data only has the renewal Izlude
+		warp "izlude",197,210;
 		end;
 	}
 	close;

@@ -353,10 +353,8 @@ cmd_fild07,299,83,4	script	Zain#cmd	100,{
 	case 2:
 		if (Zeny < 800) break;
 		set Zeny, Zeny-800;
-		if(checkre(0))
-			warp "izlude",195,212;
-		else
-			warp "izlude",176,182;
+		// Ragnarok Solo: the client data only has the renewal Izlude
+		warp "izlude",195,212;
 		end;
 	case 3:
 		mes .@n$;

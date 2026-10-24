@@ -11,7 +11,9 @@
 #include "winapi.hpp"
 #endif
 
+#ifndef RA_SQLITE
 #include <mysql.h>
+#endif
 
 #include "cbasetypes.hpp"
 #include "strlib.hpp"
@@ -243,6 +245,9 @@ typedef struct s_column_length s_column_length;
 class SqlStmt{
 private:
 	StringBuf buf;
+#ifdef RA_SQLITE
+	struct SqlStmtData* data;
+#else
 	MYSQL_STMT* stmt;
 	MYSQL_BIND* params;
 	MYSQL_BIND* columns;
@@ -251,6 +256,7 @@ private:
 	size_t max_columns;
 	bool bind_params;
 	bool bind_columns;
+#endif
 
 	void ShowDebugTruncatedColumn( size_t i );
 

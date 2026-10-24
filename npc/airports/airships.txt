@@ -34,9 +34,10 @@ OnUnhide:
 
 OnTouch_:
 	switch ($@airplanelocation) {
-	case 0: warp "yuno",92,260; end;
-	case 1: warp "einbroch",92,278; end;
-	case 2: warp "lighthalzen",302,75; end;
+	// Ragnarok Solo: the 2023 client data has no airship docks; land in the airport, as kRO does
+	case 0: warp "y_airport",143,39; end;
+	case 1: warp "airport",143,39; end;
+	case 2: warp "lhz_airport",143,39; end;
 	case 3: warp "hugel",181,146; end;
 	}
 }
@@ -659,12 +660,11 @@ OnTouch_:
 	switch ($@airplanelocation2) {
 	case 0: warp "ra_fild12",292,204; end;
 	case 1: 
-		if(checkre(0))
-			warp "izlude",200,73;
-		else
-			warp "izlude",200,56;
+		// Ragnarok Solo: the client data only has the renewal Izlude
+		warp "izlude",200,73;
 		end;
-	case 2: warp "yuno",12,261; end;
+	// Ragnarok Solo: the 2023 client data has no airship docks; land in the airport, as kRO does
+	case 2: warp "y_airport",143,39; end;
 	}
 
 OnInit:

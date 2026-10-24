@@ -1376,6 +1376,7 @@ enum e_summoner_power_type {
 void pc_set_reg_load(bool val);
 int32 pc_class2idx(int32 class_);
 int32 pc_get_group_level( const map_session_data* sd );
+int32 pc_max_hair_style( const map_session_data& sd ); // Ragnarok Solo: the last hair style by sex and race
 int32 pc_get_group_id( const map_session_data* sd );
 bool pc_can_sell_item( const map_session_data* sd, const item* item, enum npc_subtype shoptype );
 bool pc_can_give_items( const map_session_data* sd );

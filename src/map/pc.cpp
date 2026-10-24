@@ -2107,7 +2107,7 @@ bool pc_authok(map_session_data *sd, uint32 login_id2, time_t expiration_time, i
 	// Checks and fixes to character status data, that are required
 	// in case of configuration change or stuff, which cannot be
 	// checked on char-server.
-	sd->status.hair = cap_value(sd->status.hair,MIN_HAIR_STYLE,MAX_HAIR_STYLE);
+	sd->status.hair = cap_value(sd->status.hair,MIN_HAIR_STYLE,pc_max_hair_style(*sd)); // Ragnarok Solo: per sex and race
 	sd->status.hair_color = cap_value(sd->status.hair_color,MIN_HAIR_COLOR,MAX_HAIR_COLOR);
 	sd->status.clothes_color = cap_value(sd->status.clothes_color,MIN_CLOTH_COLOR,MAX_CLOTH_COLOR);
 
@@ -11106,6 +11106,17 @@ void pc_equiplookall(map_session_data *sd)
 	clif_changelook(sd,LOOK_ROBE, sd->status.robe);
 }
 
+/**
+ * Ragnarok Solo: the last hair style a character's art has: a Doram's (`max_hair_style_doram`), a male human's
+ * (`max_hair_style_male`), else a female human's (`max_hair_style`)
+ */
+int32 pc_max_hair_style( const map_session_data& sd ){
+	if( ( sd.class_ & MAPID_FIRSTMASK ) == MAPID_SUMMONER ){
+		return battle_config.max_hair_style_doram;
+	}
+	return sd.status.sex == SEX_MALE ? battle_config.max_hair_style_male : MAX_HAIR_STYLE;
+}
+
 /*==========================================
  * Tell client player sd has change look (hair,equip...)
  *------------------------------------------*/
@@ -11114,7 +11125,7 @@ void pc_changelook(map_session_data *sd,int32 type,int32 val) {
 
 	switch(type) {
 	case LOOK_HAIR:	//Use the battle_config limits! [Skotlex]
-		val = cap_value(val, MIN_HAIR_STYLE, MAX_HAIR_STYLE);
+		val = cap_value(val, MIN_HAIR_STYLE, pc_max_hair_style(*sd)); // Ragnarok Solo: per sex and race
 
 		if (sd->status.hair != val) {
 			sd->status.hair = val;

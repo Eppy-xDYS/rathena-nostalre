@@ -19,7 +19,8 @@ moc_ruins,118,176,4	duplicate(Alchemist)	Alchemist#moc	64
 // Resurrection of Satan Morocc
 // ============================================================
 
-morocc,176,103,3	duplicate(Continental Official)	Continental Official#mor	754
+// Ragnarok Solo: placed for the renewal layout (the client data has no other)
+morocc,176,101,3	duplicate(Continental Official)	Continental Official#mor	754
 
 // Succession of the Prince
 // ============================================================

@@ -166,8 +166,13 @@ set( COMMON_HEADERS
 	${COMMON_ALL_HEADERS}
 	"${CMAKE_CURRENT_SOURCE_DIR}/sql.hpp"
 	CACHE INTERNAL "common headers" )
+if( ENABLE_SQLITE )
+	set( COMMON_SQL_SOURCE "${CMAKE_CURRENT_SOURCE_DIR}/sql_sqlite.cpp" )
+else()
+	set( COMMON_SQL_SOURCE "${CMAKE_CURRENT_SOURCE_DIR}/sql.cpp" )
+endif()
 set( COMMON_SOURCES
-	"${CMAKE_CURRENT_SOURCE_DIR}/sql.cpp"
+	${COMMON_SQL_SOURCE}
 	CACHE INTERNAL "common sources" )
 set( DEPENDENCIES common_base yaml-cpp ryml )
 set( LIBRARIES ${GLOBAL_LIBRARIES} ${MYSQL_LIBRARIES} )
