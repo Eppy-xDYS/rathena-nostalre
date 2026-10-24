@@ -1,7 +1,10 @@
 # nostalRE fork of rAthena
 
-This fork carries the rAthena changes used by the
-[nostalRE](https://github.com/si-klyde/nostalre) Android app. The app bundles
+This fork carries the rAthena changes used by
+[nostalRE](https://github.com/si-klyde/nostalre). Its
+[launcher](https://github.com/si-klyde/nostalre-launcher) takes this branch as its
+`server/` submodule and builds the Android app and the desktop servers from it
+(`scripts/build-server.sh`, `scripts/build-apk.sh`). The app bundles
 login, char and map servers built from this source, together with this tree's
 `conf/`, `db/` and `npc/` folders and a SQLite database made from `sql-files/`.
 
@@ -79,3 +82,4 @@ A host build uses the same CMake options without the toolchain arguments.
 ## Tags
 
 - `nostalre-v0.1.0`: source of the servers in nostalRE v0.1.0.
+- `nostalre-v0.1.1`: source of the servers in nostalRE v0.1.1 (drops go straight to the inventory).
