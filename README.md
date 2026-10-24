@@ -1,3 +1,7 @@
+> **nostalRE fork.** This branch carries the rAthena changes used by the
+> [nostalRE](https://github.com/si-klyde/nostalre) Android app. See [NOSTALRE.md](NOSTALRE.md)
+> for the baseline, modifications and build steps. Upstream: [rathena/rathena](https://github.com/rathena/rathena).
+
 <img src="doc/logo.png" align="right" height="90" />
 
 # rAthena
