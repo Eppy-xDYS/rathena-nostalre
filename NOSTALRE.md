@@ -35,6 +35,9 @@ Summary:
   pincode off, MVP EXP message on, homunculus growth message off.
 - NPC and warp positions for current client map data (Renewal Izlude, no
   airship docks).
+- Custom NPCs on (`npc/scripts_custom.conf`): Job Master, Warper, Healer
+  (free), Stylist and Reset Girl, in Prontera's square. Prontera's Healer
+  moved to 162,195, clear of the Ash-Vacuum Warper.
 
 ## Building the Android servers
 
