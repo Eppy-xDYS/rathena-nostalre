@@ -37,7 +37,8 @@ Summary:
   airship docks).
 - Custom NPCs on (`npc/scripts_custom.conf`): Job Master, Warper, Healer
   (free), Stylist and Reset Girl, in Prontera's square. Prontera's Healer
-  moved to 162,195, clear of the Ash-Vacuum Warper.
+  moved to 162,195, clear of the Ash-Vacuum Warper. `npc/nostalre_off.conf`
+  (empty here) takes `delnpc:` lines for the ones the app's player turns off.
 
 ## Building the Android servers
 
