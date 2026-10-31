@@ -5510,7 +5510,23 @@ ACMD_FUNC(servertime)
 				clif_displaymessage(fd, msg_txt(sd,231)); // Game time: The game is in permanent daylight.
 		} else
 			clif_displaymessage(fd, msg_txt(sd,232)); // Game time: The game is in permanent night.
-	else {
+	else if (battle_config.day_duration > 0 && battle_config.night_duration > 0) {
+		// Wall-clock cycle [nostalRE]: current state lasts until the next boundary into the opposite state
+		int64 day = battle_config.day_duration, night = battle_config.night_duration;
+		int64 cycle = day + night, pos = map_daynight_cycle_pos();
+		if (night_flag == 0) {
+			sprintf(temp, msg_txt(sd,235), txt_time(((pos < day) ? day - pos : cycle - pos + day) / 1000)); // Game time: The game is in daylight for %s.
+			clif_displaymessage(fd, temp);
+			sprintf(temp, msg_txt(sd,237), txt_time(night / 1000)); // Game time: After, the game will be in night for %s.
+		} else {
+			sprintf(temp, msg_txt(sd,233), txt_time((cycle - pos) / 1000)); // Game time: The game is in night for %s.
+			clif_displaymessage(fd, temp);
+			sprintf(temp, msg_txt(sd,239), txt_time(day / 1000)); // Game time: After, the game will be in daylight for %s.
+		}
+		clif_displaymessage(fd, temp);
+		sprintf(temp, msg_txt(sd,238), txt_time(cycle / 1000)); // Game time: A day cycle has a normal duration of %s.
+		clif_displaymessage(fd, temp);
+	} else {
 		const struct TimerData * timer_data2;
 		if (night_flag == 0) {
 			if ((timer_data = get_timer(night_timer_tid)) != nullptr && (timer_data2 = get_timer(day_timer_tid)) != nullptr) {

@@ -1686,6 +1686,7 @@ extern int32 day_timer_tid;
 extern int32 night_timer_tid;
 TIMER_FUNC(map_day_timer); // by [yor]
 TIMER_FUNC(map_night_timer); // by [yor]
+int64 map_daynight_cycle_pos();
 
 // Rental System
 void pc_inventory_rentals(map_session_data *sd);

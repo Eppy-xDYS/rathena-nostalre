@@ -3,6 +3,7 @@
 
 #include "pc.hpp"
 
+#include <chrono>
 #include <cmath>
 #include <cstdlib>
 #include <map>
@@ -13101,6 +13102,39 @@ TIMER_FUNC(map_night_timer){
 	return 0;
 }
 
+/// Position in the wall-clock day/night cycle: UTC ms since epoch modulo (day + night).
+/// Uses system_clock, not gettick(), so the cycle stays aligned after device sleep. [nostalRE]
+int64 map_daynight_cycle_pos() {
+	int64 cycle = (int64)battle_config.day_duration + battle_config.night_duration;
+	int64 now_ms = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+	return now_ms % cycle;
+}
+
+static bool map_daynight_want_night() {
+	return map_daynight_cycle_pos() >= battle_config.day_duration;
+}
+
+static bool daynight_last_want = false;
+
+/// Acts only when the clock crosses a boundary, so GM @day/@night holds until the next one. [nostalRE]
+TIMER_FUNC(map_daynight_clock_timer){
+	// @reloadbattleconf may disable the cycle; also avoids % 0 in map_daynight_cycle_pos
+	if (battle_config.day_duration <= 0 || battle_config.night_duration <= 0)
+		return 0;
+
+	bool want_night = map_daynight_want_night();
+
+	if (want_night == daynight_last_want)
+		return 0;
+
+	daynight_last_want = want_night;
+	if (want_night)
+		map_night_timer(tid, tick, 0, 0);
+	else
+		map_day_timer(tid, tick, 0, 0);
+	return 0;
+}
+
 /**
 * Attempt to stand up a player
 * @param sd
@@ -16158,14 +16192,11 @@ void do_init_pc(void) {
 	night_flag = battle_config.night_at_start ? 1 : 0;
 
 	if (battle_config.day_duration > 0 && battle_config.night_duration > 0) {
-		int32 day_duration = battle_config.day_duration;
-		int32 night_duration = battle_config.night_duration;
-		// add night/day timer [Yor]
-		add_timer_func_list(map_day_timer, "map_day_timer");
-		add_timer_func_list(map_night_timer, "map_night_timer");
-
-		day_timer_tid   = add_timer_interval(gettick() + (night_flag ? 0 : day_duration) + night_duration, map_day_timer,   0, 0, day_duration + night_duration);
-		night_timer_tid = add_timer_interval(gettick() + day_duration + (night_flag ? night_duration : 0), map_night_timer, 0, 0, day_duration + night_duration);
+		// Wall-clock cycle overrides night_at_start [nostalRE]
+		daynight_last_want = map_daynight_want_night();
+		night_flag = daynight_last_want ? 1 : 0;
+		add_timer_func_list(map_daynight_clock_timer, "map_daynight_clock_timer");
+		add_timer_interval(gettick() + 1000, map_daynight_clock_timer, 0, 0, 1000);
 	}
 
 	do_init_pc_groups();
