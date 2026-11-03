@@ -40,6 +40,27 @@ Summary:
   moved to 162,195, clear of the Ash-Vacuum Warper. `npc/nostalre_off.conf`
   (empty here) takes `delnpc:` lines for the ones the app's player turns off.
 
+## Population Engine
+
+Fake players ("shells") from the
+[Population Engine](https://github.com/YlenXWalker/Population-Engine) by Louis T
+Steinhil (GPL-3.0), taken from its commit `2cfb45d` (built on the same rAthena
+baseline): `src/map/population_engine*`, `db/population_*.yml`,
+`conf/battle/population_engine.conf`, `npc/custom/population/arena.txt`, and the
+engine's hooks in rAthena's own files. Left out: its committed `conf/import/`
+and `db/import/` trees, the `PACKETVER` define in `src/custom/defines_pre.hpp`
+(CMake sets it), the FluxCP `sql-files/population_engine/` table and the build
+files we do not use. Our changes carry a `nostalRE` comment:
+
+- `population_engine_enable` (off by default): when off, no yml is read, no
+  timer runs, `@populate`/`@reloadpopenginedb` refuse and the arena NPC idles.
+  `conf/battle_athena.conf` imports the engine conf before the app's import.
+- The FluxCP stats query (MySQL-only syntax, a table we do not ship) is compiled
+  out of the SQLite build.
+- Shells never join a party: a whispered "party" gets a refusal, and
+  `party_invite` refuses shells (`src/map/party.cpp`).
+- `population_engine_max_count` 300.
+
 ## Building the Android servers
 
 The app's servers are built for Renewal at packet version 20250716, with the

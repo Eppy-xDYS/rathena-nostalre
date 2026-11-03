@@ -413,6 +413,12 @@ bool party_invite( map_session_data& sd, map_session_data *tsd ){
 		return false;
 	}
 
+	// nostalRE: Population Engine shells refuse invites (no char row behind them to save)
+	if( IS_POPULATION_ENGINE_ACCOUNT_ID( tsd->status.account_id ) ){
+		clif_party_invite_reply( sd, tsd->status.name, PARTY_REPLY_JOINMSG_REFUSE );
+		return false;
+	}
+
 	if( tsd->status.disable_partyinvite ){
 		clif_party_invite_reply( sd, tsd->status.name, PARTY_REPLY_JOINMSG_REFUSE );
 		return false;
