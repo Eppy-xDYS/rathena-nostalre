@@ -261,6 +261,9 @@ void log_pick( int32 id, int16 m, e_log_pick_type type, int32 amount, const item
 void log_pick_pc( const map_session_data* sd, e_log_pick_type type, int32 amount, const item* itm )
 {
 	nullpo_retv(sd);
+	// nostalRE: Population Engine shells have no rows to point at; their logs would only grow the save
+	if( IS_POPULATION_ENGINE_ACCOUNT_ID( sd->status.account_id ) )
+		return;
 	log_pick(sd->status.char_id, sd->m, type, amount, itm);
 }
 
@@ -276,6 +279,9 @@ void log_pick_mob( const mob_data* md, e_log_pick_type type, int32 amount, const
 // ids are char_ids
 void log_zeny( const map_session_data &target_sd, e_log_pick_type type, uint32 src_id, int32 amount )
 {
+	// nostalRE: Population Engine shells have no rows to point at; their logs would only grow the save
+	if( IS_POPULATION_ENGINE_ACCOUNT_ID( target_sd.status.account_id ) )
+		return;
 	if( !log_config.zeny || ( log_config.zeny != 1 && abs(amount) < log_config.zeny ) )
 		return;
 
@@ -413,6 +419,9 @@ void log_npc( npc_data* nd, const char* message ){
 void log_npc( map_session_data* sd, const char* message )
 {
 	nullpo_retv(sd);
+	// nostalRE: Population Engine shells have no rows to point at; their logs would only grow the save
+	if( IS_POPULATION_ENGINE_ACCOUNT_ID( sd->status.account_id ) )
+		return;
 
 	if( !log_config.npc )
 		return;
@@ -493,6 +502,9 @@ void log_chat( e_log_chat_type type, int32 type_id, int32 src_charid, int32 src_
 /// logs cash transactions
 void log_cash( const map_session_data* sd, e_log_pick_type type, e_log_cash_type cash_type, int32 amount ){
 	nullpo_retv( sd );
+	// nostalRE: Population Engine shells have no rows to point at; their logs would only grow the save
+	if( IS_POPULATION_ENGINE_ACCOUNT_ID( sd->status.account_id ) )
+		return;
 
 	if( !log_config.cash )
 		return;
@@ -529,6 +541,9 @@ void log_feeding( const map_session_data* sd, e_log_feeding_type type, t_itemid 
 	uint16 target_class = 0;
 
 	nullpo_retv( sd );
+	// nostalRE: Population Engine shells have no rows to point at; their logs would only grow the save
+	if( IS_POPULATION_ENGINE_ACCOUNT_ID( sd->status.account_id ) )
+		return;
 
 	if (!(log_config.feeding&type))
 		return;
