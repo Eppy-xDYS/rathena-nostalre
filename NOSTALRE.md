@@ -39,6 +39,8 @@ Summary:
   (free), Stylist and Reset Girl, in Prontera's square. Prontera's Healer
   moved to 162,195, clear of the Ash-Vacuum Warper. `npc/nostalre_off.conf`
   (empty here) takes `delnpc:` lines for the ones the app's player turns off.
+- Job Master offers the 4th job change: its check kept the transcendent bit,
+  which no 4th job's class has, so no transcendent 3rd job got the option.
 
 ## Population Engine
 
