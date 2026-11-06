@@ -42,6 +42,8 @@ Summary:
 - New characters start with an Infinite Fly Wing and a Butterfly Wing (Renewal
   `start_items` and `start_items_doram`). Butterfly Wings are not used up and
   cannot be sold or dropped.
+- Job Master offers the 4th job change: its check kept the transcendent bit,
+  which no 4th job's class has, so no transcendent 3rd job got the option.
 
 ## Population Engine
 
